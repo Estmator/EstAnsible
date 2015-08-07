@@ -1,0 +1,3 @@
+django_home: /home/ubuntu/django-imager/imagersite
+rds_db_instance: djangodb
+home: /home/ubuntu/django-imager
