@@ -1,3 +1,4 @@
+# {{ ansible_managed }}
 description "imagersite"
 
 start on (filesystem)
@@ -9,7 +10,7 @@ setgid ubuntu
 chdir {{ django_home }}
 env DJANGO_SETTINGS_MODULE='imagersite.settings'
 env SECRET_KEY={{ secret_key }}
-env ALGORITHMIA_KEY={{ algorithmia_key }}
+env ALGORITHMIA_KEY="{{ algorithmia_key }}"
 env ALLOWED_HOSTS={{ ec2_public_dns_name }}
 env STATIC_ROOT={{ static_root }}
 env MEDIA_ROOT={{ media_root }}

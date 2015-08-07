@@ -9,8 +9,6 @@
     - python-pip
     - postgresql-client
     - libpq-dev
-    - python-pip
-    - python-psycopg2
     - git
     - binutils
     - libproj-dev
@@ -35,10 +33,14 @@
 
 - name: Set DB URL
   set_fact: 
-    db_url: "postgis://{{ db_host.ec2_engine }}://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
+    db_url: "postgis://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
+
+- name: Whats the DB URL
+  debug: var=db_url
 
 - name: Run Migrations
   environment:
+    SECRET_KEY: "{{ secret_key }}"
     DATABASE_URL: "{{ db_url }}"
   django_manage:
     app_path: "{{ django_home }}"
@@ -47,6 +49,7 @@
 
 - name: Collect Static Files
   environment:
+    SECRET_KEY: "{{ secret_key }}"
     DATABASE_URL: "{{ db_url }}"
   django_manage:
     app_path: "{{ django_home }}"
