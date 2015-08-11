@@ -10,7 +10,7 @@ setgid nogroup
 chdir {{ django_home }}
 env DATABASE_URL="{{ db_url }}"
 env SECRET_KEY="{{ secret_key }}"
-env ALLOWED_HOSTS="{{ ec2_public_dns_name }}"
+env ALLOWED_HOSTS="{{ ec2_public_dns_name }} dev.estmator.com estmator.com"
 env EMAIL_HOST="{{ email_host }}"
 env EMAIL_PORT="{{ email_port }}"
 env EMAIL_HOST_USER="{{ email_user }}"

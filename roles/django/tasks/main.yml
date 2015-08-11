@@ -11,7 +11,8 @@
     - libpq-dev
     - git
 
-- name: Clone Django Repository
+- name: Get Django Repository
+  # I think this will clone if it doesn't exist, then update otherwise.
   git: repo=git@github.com:Estmator/EstmatorApp.git dest={{ home }} force=yes
 
 - name: Install Python Dependencies
