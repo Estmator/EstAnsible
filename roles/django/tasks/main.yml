@@ -10,12 +10,9 @@
     - postgresql-client
     - libpq-dev
     - git
-    - binutils
-    - libproj-dev
-    - gdal-bin
 
 - name: Clone Django Repository
-  git: repo=https://github.com/migrantj/django-imager.git dest={{ home }} force=yes
+  git: repo=git@github.com:Estmator/EstmatorApp.git dest={{ home }} force=yes
 
 - name: Install Python Dependencies
   sudo: yes
@@ -33,7 +30,7 @@
 
 - name: Set DB URL
   set_fact: 
-    db_url: "postgis://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
+    db_url: "postgres://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
 
 - name: Whats the DB URL
   debug: var=db_url
@@ -44,7 +41,7 @@
     DATABASE_URL: "{{ db_url }}"
   django_manage:
     app_path: "{{ django_home }}"
-    settings: imagersite.settings
+    settings: estmator_project.settings
     command: migrate
 
 - name: Collect Static Files
@@ -53,5 +50,5 @@
     DATABASE_URL: "{{ db_url }}"
   django_manage:
     app_path: "{{ django_home }}"
-    settings: imagersite.settings
+    settings: estmator_project.settings
     command: collectstatic

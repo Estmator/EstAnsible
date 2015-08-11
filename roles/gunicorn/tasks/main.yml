@@ -6,8 +6,8 @@
 
 - name: Create gunicorn Upstart Job
   sudo: yes
-  template: src=imagersite.conf.j2 dest=/etc/init/imagersite.conf
+  template: src=estmator.conf.j2 dest=/etc/init/estmator.conf
 
 - name: Start gunicorn Upstart Job
   sudo: yes
-  service: name=imagersite state=restarted
+  service: name=estmator state=restarted
