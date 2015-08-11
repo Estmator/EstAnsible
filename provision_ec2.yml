@@ -3,6 +3,6 @@
 - name: Deploy Django Site
   hosts: local
   vars:
-    rds_database_instance: imager
+    rds_database_instance: estmator
   roles:
     - ec2_provisioning

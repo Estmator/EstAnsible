@@ -4,7 +4,7 @@ instance_type: t2.micro
 ami: ami-5189a661
 vpc_subnet_id: subnet-c1f432a4
 region: us-west-2
-instance_tags: {"Name": "Django-Imager"}
+instance_tags: {"role": "estmator"}
 root_ebs_size: 8
 zone: us-west-2a
 instance_profile_name: mypoweruser
