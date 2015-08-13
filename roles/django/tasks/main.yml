@@ -11,9 +11,15 @@
     - libpq-dev
     - git
 
+- name: copy GitHub deploy keys
+  copy: src=id_rsa dest=~/ubuntu/.ssh/id_rsa
+  copy: src=id_rsa.pub dest=~/ubuntu/.ssh/id_rsa.pub
+
 - name: Get Django Repository
-  # I think this will clone if it doesn't exist, then update otherwise.
-  git: repo=git@github.com:Estmator/EstmatorApp.git dest={{ home }} force=yes
+  git: repo=git@github.com:Estmator/EstmatorApp.git
+       dest={{ home }}
+       force=yes
+       key_file=~/ubuntu/.ssh/id_rsa
 
 - name: Install Python Dependencies
   sudo: yes
@@ -21,13 +27,12 @@
     state: present
     requirements: "{{ home }}/requirements.txt"
 
+- name: Get Secrets
+  include_vars: secrets.yml
+
 - name: Get DB Hostvars
   set_fact:
     db_host: "{{ hostvars[groups[rds_db_instance][0]] }}"
-
-- name: Get DB Password
-  include_vars: secrets.yml
-
 
 - name: Set DB URL
   set_fact: 
