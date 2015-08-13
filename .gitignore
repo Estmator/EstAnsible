@@ -1,6 +1,9 @@
 # Secret keys file
 secrets.yml
 
+# ssh keys
+id_rsa*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
