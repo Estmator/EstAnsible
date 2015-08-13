@@ -4,6 +4,9 @@ secrets.yml
 # ssh keys
 id_rsa*
 
+# ignore json files that may be our base sql dump
+*json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
