@@ -12,14 +12,14 @@
     - git
 
 - name: copy GitHub deploy keys
-  copy: src=id_rsa dest=~/ubuntu/.ssh/id_rsa
-  copy: src=id_rsa.pub dest=~/ubuntu/.ssh/id_rsa.pub
+  copy: src=id_rsa dest=~/.ssh/id_rsa
+  copy: src=id_rsa.pub dest=~/.ssh/id_rsa.pub
 
 - name: Get Django Repository
   git: repo=git@github.com:Estmator/EstmatorApp.git
        dest={{ home }}
        force=yes
-       key_file=~/ubuntu/.ssh/id_rsa
+       key_file=~/.ssh/id_rsa
 
 - name: Install Python Dependencies
   sudo: yes
