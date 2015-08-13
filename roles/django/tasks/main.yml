@@ -38,9 +38,6 @@
   set_fact: 
     db_url: "postgres://{{ db_host.ec2_master_username }}:{{ db_password }}@{{ db_host.ec2__address }}:{{ db_host.ec2__port }}/{{ db_host.ec2_DBName }}"
 
-- name: Whats the DB URL
-  debug: var=db_url
-
 - name: Run Migrations
   environment:
     SECRET_KEY: "{{ secret_key }}"
@@ -49,6 +46,11 @@
     app_path: "{{ django_home }}"
     settings: estmator_project.settings
     command: migrate
+
+# only copy the base sql file, not automating loading this file
+# loading can be destructive and wipes out existing data
+- name: Copy Base SQL Data
+  copy: src=basedb.json dest={{ django_home }}
 
 - name: Collect Static Files
   environment:
