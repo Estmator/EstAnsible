@@ -16,7 +16,7 @@
   copy: src=id_rsa.pub dest=~/.ssh/id_rsa.pub
 
 - name: Get Django Repository
-  git: repo=git@github.com:Estmator/EstmatorApp.git
+  git: repo=git@github.com:Estmator/EstmatorApp.git accept_hostkey=yes
        dest={{ home }}
        force=yes
        key_file=~/.ssh/id_rsa
