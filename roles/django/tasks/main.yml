@@ -12,11 +12,12 @@
     - git
 
 - name: copy GitHub deploy keys
-  copy: src=id_rsa dest=~/.ssh/id_rsa
-  copy: src=id_rsa.pub dest=~/.ssh/id_rsa.pub
+  copy: src=id_rsa dest=~/.ssh/ mode=600
+  copy: src=id_rsa.pub dest=~/.ssh/
 
 - name: Get Django Repository
-  git: repo=git@github.com:Estmator/EstmatorApp.git accept_hostkey=yes
+  git: repo=git@github.com:Estmator/EstmatorApp.git
+       accept_hostkey=yes
        dest={{ home }}
        force=yes
        key_file=~/.ssh/id_rsa
@@ -49,6 +50,7 @@
 
 # only copy the base sql file, not automating loading this file
 # loading can be destructive and wipes out existing data
+### since we're using the single RDS instance, we don't really need this?
 - name: Copy Base SQL Data
   copy: src=basedb.json dest={{ django_home }}
 
